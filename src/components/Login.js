@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-function Login() {
+import { signInAPI } from '../actions';
+
+function Login(props) {
     return (
         <Container>
             <Nav>
@@ -18,7 +20,7 @@ function Login() {
                     <img src="/images/login-hero.svg" alt="login-hero" />
                 </Hero>
                 <Form>
-                    <Google>
+                    <Google onClick={() => props.signIn()}>
                         <img src="/images/google.svg" alt="google" />
                         Sign in with Google
                     </Google>
@@ -152,6 +154,7 @@ const Google = styled.button`
     transition-duration: 167ms;
     font-size: 20px;
     color: rgba(0,0,0,0.6);
+    cursor: pointer;
     &:hover {
         background-color: rgba(207,207,207,0.25);
         color: rgba(0,0,0,0.75);
@@ -160,6 +163,8 @@ const Google = styled.button`
 const mapStateToProps = (state) => {
     return {};
 }
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    signIn: () => dispatch(signInAPI()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
