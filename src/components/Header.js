@@ -7,8 +7,8 @@ const Header = (props) => {
         <Container>
             <Content>
                 <Logo>
-                    <a href="/">
-                        <img src="/images/home-logo.svg" alt="logo" />
+                    <a href="/home">
+                        <img src="/images/home-logo.svg" alt="" />
                     </a>
                 </Logo>
                 <Search>
@@ -16,60 +16,66 @@ const Header = (props) => {
                         <input type="text" placeholder="Search" />
                     </div>
                     <SearchIcon>
-                        <img src="/images/search-icon.svg" alt="search-icon" />
+                        <img src="/images/search-icon.svg" alt="" />
                     </SearchIcon>
                 </Search>
                 <Nav>
                     <NavListWrapper>
                         <NavList className="active">
                             <a>
-                                <img src="/images/nav-home.svg" alt="nav-home" />
+                                <img src="/images/nav-home.svg" alt="" />
                                 <span>Home</span>
                             </a>
                         </NavList>
 
                         <NavList>
                             <a>
-                                <img src="/images/nav-network.svg" alt="nav-network" />
+                                <img src="/images/nav-network.svg" alt="" />
                                 <span>My Network</span>
                             </a>
                         </NavList>
+
                         <NavList>
                             <a>
-                                <img src="/images/nav-jobs.svg" alt="nav-jobs" />
+                                <img src="/images/nav-jobs.svg" alt="" />
                                 <span>Jobs</span>
                             </a>
                         </NavList>
+
                         <NavList>
                             <a>
-                                <img src="/images/nav-messaging.svg" alt="nav-messaging" />
+                                <img src="/images/nav-messaging.svg" alt="" />
                                 <span>Messaging</span>
                             </a>
                         </NavList>
+
                         <NavList>
                             <a>
-                                <img src="/images/nav-notifications.svg" alt="nav-notifications" />
+                                <img src="/images/nav-notifications.svg" alt="" />
                                 <span>Notifications</span>
                             </a>
                         </NavList>
+
                         <User>
                             <a>
                                 {props.user && props.user.photoURL ? (<img src={props.user.photoURL} alt="user" />) : (<img src="/images/user.svg" alt="user" />)}
-                                <span>Me
-                                    <img src="/images/down-icon.svg" alt="down" />
-                                </span>
+                                <span></span>
+                                <img src="/images/down-icon.svg" alt="down" />
+
+
                             </a>
 
-                            <SignOut onClick={() => props.signOut()}>
+                            <SignOut>
                                 <a>Sign Out</a>
                             </SignOut>
                         </User>
+
                         <Work>
                             <a>
-                                <img src="/images/nav-work.svg" alt="work" />
+                                <img src="/images/nav-work.svg" alt="" />
                                 <span>
                                     Work
-                                    <img src="/images/down-icon.svg" alt="down" />
+                                    <img src="/images/down-icon.svg" alt="" />
                                 </span>
                             </a>
                         </Work>
@@ -77,8 +83,8 @@ const Header = (props) => {
                 </Nav>
             </Content>
         </Container>
-    )
-}
+    );
+};
 
 const Container = styled.div`
     background-color: white;
@@ -89,6 +95,7 @@ const Container = styled.div`
     top: 0;
     width: 100vw;
     z-index: 100;
+    padding-top: 5px;
 
 `
 const Content = styled.div`

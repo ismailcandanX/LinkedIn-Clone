@@ -31,3 +31,8 @@ export function signOutAPI() {
         }).catch((error) => console.log(error))
     }
 }
+
+export function postArticleAPI(payload) {
+    return (dispatch) => {
+    }
+}

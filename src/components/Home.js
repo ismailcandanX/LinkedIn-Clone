@@ -34,7 +34,6 @@ const Content = styled.div`
 
 `
 const Section = styled.div`
-    min-height: 50px;
     padding: 16px 0;
     box-sizing: content-box;
     text-align: center;
@@ -65,7 +64,7 @@ const Layout = styled.div`
     column-gap: 25px;
     row-gap: 25px;
     /* grid-template-rows: auto; */
-    margin: 25px 0;
+    margin: 10px 0;
     @media ( max-width: 768px) {
         display: flex;
         flex-direction: column;
