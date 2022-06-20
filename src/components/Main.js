@@ -8,7 +8,9 @@ const Main = (props) => {
 
     const handleClick = (e) => {
         e.preventDefault()
-
+        if (e.target !== e.currentTarget) {
+            return;
+        }
         switch (showModal) {
             case "open":
                 setShowModal("close")
@@ -293,4 +295,5 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = state => ({})
+
 export default connect(mapStateToProps, mapDispatchToProps)(Main)
