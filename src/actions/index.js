@@ -1,9 +1,9 @@
 import { auth, provider } from "../firebase";
 import db from "../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { SET_USER, SET_LOADING_STATUS } from "./actionType";
+import { SET_USER, SET_LOADING_STATUS, GET_ARTICLES } from "./actionType";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc, collection, doc, getDoc, onSnapshot, orderBy, query } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 
 
 export const setUser = (payload) => ({
@@ -14,6 +14,11 @@ export const setUser = (payload) => ({
 export const setLoading = (status) => ({
     type: SET_LOADING_STATUS,
     status: status,
+})
+
+export const getArticles = (payload) => ({
+    type: GET_ARTICLES,
+    payload: payload,
 })
 
 export function signInAPI() {
@@ -105,7 +110,7 @@ export function getArticlesAPI() {
         const q = query(collection(db, 'articles'))
         const unsub = onSnapshot(q, (querySnapshot) => {
             payload = querySnapshot.docs.map((doc) => doc.data())
-            console.log('Data', payload);
+            dispatch(getArticles(payload))
         });
     }
 }
