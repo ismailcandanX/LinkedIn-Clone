@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import PostModal from "./PostModal"
+import { getArticlesAPI } from '../actions'
 
 const Main = (props) => {
     const [showModal, setShowModal] = useState("close")
+
+    useEffect(() => {
+        props.getArticles()
+    }, [])
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -26,7 +31,7 @@ const Main = (props) => {
     return <Container>
         <ShareBox>
             <div>
-                {props.user.photoURL ? (<img src={props.user.photoURL} alt="user" />) : (<img src="/images/user.svg" alt="user" />)}
+                {props.user && props.user.photoURL ? (<img src={props.user.photoURL} alt="user" />) : (<img src="/images/user.svg" alt="user" />)}
                 <button onClick={handleClick}>Start a post</button>
             </div>
             <div>
@@ -48,7 +53,8 @@ const Main = (props) => {
                 </button>
             </div>
         </ShareBox>
-        <div>
+        <Content>
+            {props.loading && <img src="/images/spin-loader.svg" alt="loading" />}
             <Article>
                 <SharedActor>
                     <a>
@@ -99,7 +105,7 @@ const Main = (props) => {
                     </button>
                 </SocialActions>
             </Article>
-        </div>
+        </Content>
         <PostModal showModal={showModal} handleClick={handleClick} />
     </Container>
 }
@@ -177,6 +183,12 @@ const Article = styled(CommonCard)`
     padding: 0;
     margin: 0 0 8px;
     overflow: visible;
+`
+const Content = styled.div`
+    text-align: center;
+    & > img {
+        width: 30px;
+    }
 `
 const SharedActor = styled.div`
     display: flex;
@@ -292,8 +304,11 @@ const SocialActions = styled.div`
 const mapStateToProps = state => {
     return {
         user: state.userState.user,
+        loading: state.articleState.loading,
     }
 }
-const mapDispatchToProps = state => ({})
+const mapDispatchToProps = (dispatch) => ({
+    getArticles: () => dispatch(getArticlesAPI()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

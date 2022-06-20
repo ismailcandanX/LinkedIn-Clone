@@ -1,14 +1,19 @@
 import { auth, provider } from "../firebase";
 import db from "../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { SET_USER } from "./actionType";
+import { SET_USER, SET_LOADING_STATUS } from "./actionType";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 
 
 export const setUser = (payload) => ({
     type: SET_USER,
     user: payload,
+})
+
+export const setLoading = (status) => ({
+    type: SET_LOADING_STATUS,
+    status: status,
 })
 
 export function signInAPI() {
@@ -39,6 +44,8 @@ export function signOutAPI() {
 
 export function postArticleAPI(payload) {
     return (dispatch) => {
+        dispatch(setLoading(true))
+
         if (payload.image != "") {
             const storage = getStorage();
             const metadata = {
@@ -71,8 +78,34 @@ export function postArticleAPI(payload) {
                         comments: 0,
                         description: payload.description,
                     });
+                    dispatch(setLoading(false))
                 }
             );
+        } else if (payload.video) {
+            addDoc(collection(db, "articles"), {
+                actor: {
+                    description: payload.user.email,
+                    title: payload.user.displayName,
+                    date: payload.timestamp,
+                    image: payload.user.photoURL,
+                },
+                video: payload.video,
+                sharedImg: "",
+                comments: 0,
+                description: payload.description,
+            });
+            dispatch(setLoading(false))
         }
+    }
+}
+
+export function getArticlesAPI() {
+    return (dispatch) => {
+        let payload;
+        const q = query(collection(db, 'articles'))
+        const unsub = onSnapshot(q, (querySnapshot) => {
+            payload = querySnapshot.docs.map((doc) => doc.data())
+            console.log('Data', payload);
+        });
     }
 }
