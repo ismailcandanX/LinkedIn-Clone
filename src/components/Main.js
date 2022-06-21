@@ -29,7 +29,6 @@ const Main = (props) => {
                 break;
         }
     }
-    console.log(props.articles)
     return (
         <>
             {props.articles.length === 0 ? (<p>There are no articles...</p>) :
@@ -94,7 +93,7 @@ const Main = (props) => {
                                         </button>
                                     </li>
                                     <li>
-                                        <a>{article.comments}</a>
+                                        {/* <a>{article.comments}</a> */}
                                     </li>
                                 </SocialCounts>
                                 <SocialActions>
@@ -145,8 +144,9 @@ const ShareBox = styled(CommonCard)`
     color: #958b7b;
     margin: 0 0 8px;
     background: white;
-    
+    padding: 10px;
     div {
+        
         button {
             outline: none;
             color: rgba(0, 0, 0, 0.6);
@@ -270,10 +270,11 @@ const Description = styled.div`
 `
 const SharedImg = styled.div`
     margin-top: 8px;
-    width: 100%;
+    width: 96%;
     display: block;
     position: relative;
     background-color: #f9fafb;
+    margin-left: 2%;
     img {
         object-fit: contain;
         width: 100%;
@@ -295,16 +296,22 @@ const SocialCounts = styled.ul`
         button {
             display: flex;
             background-color: #fff;
+            border: none;
+            span {
+                margin-top: 5px;
+                margin-left: 5px;
+                font-size: 12px;
+            }
         }
 }
 `
 const SocialActions = styled.div`
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 0;
     min-height: 40px;
-    padding: 4px 8px;
+    width: 100%;
     button {
         display: inline-flex;
         align-items: center;
@@ -312,9 +319,19 @@ const SocialActions = styled.div`
         color: #0a660a;
         border: none;
         background-color: #fff;
+        width: 25%;
+        cursor: pointer;
         @media ( min-width: 768px ) {
             span {
                 margin-left: 8px;
+            }
+        }
+        @media ( max-width: 470px ) {
+                &:nth-child(2){
+                width: 35%;
+            }
+            img {
+                width: 25%;
             }
         }
     }

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { signInAPI } from '../actions';
 import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Login(props) {
     return (
@@ -15,7 +16,7 @@ function Login(props) {
                 </a>
                 <div>
                     <Join>Join Now</Join>
-                    <SignIn>Sign in</SignIn>
+                    <SignIn onClick={() => props.signIn()}>Sign in</SignIn>
                 </div>
             </Nav>
             <Section>
@@ -47,12 +48,20 @@ const Nav = styled.nav`
     position: relative;
     justify-content: space-between;
     flex-wrap: nowrap;
-
+    
     & > a {
         width: 135px;
         height: 34px;
         @media ( max-width: 768px ) {
             padding: 0 5px;
+        }
+        
+    }
+    & > div {
+        @media (max-width: 576px){
+            a:first-child {
+                display: none;
+            }
         }
     }
 `
@@ -81,6 +90,7 @@ const SignIn = styled.a`
     padding: 10px 24px;
     text-align: center;
     background-color: rgba(0,0,0,0);
+    cursor: pointer;
     &:hover {
         background-color: rgba(112,181,249,0.15);
         color: #0a66c2;
@@ -122,14 +132,14 @@ const Hero = styled.div`
         }
     }
     img {
-            z-index: -1;
-            width: 700px;
-            height: 670px;
+            z-index: 10;
+            width: 40%;
+            /* height: 670px; */
             position: absolute;
-            bottom: -2px;
-            right: -150px;
+            bottom: 47%;
+            right: 0px;
             @media ( max-width: 768px){
-                top: 230px;
+                /* top: 230px; */
                 width: initial;
                 position: initial;
             }
@@ -159,6 +169,10 @@ const Google = styled.button`
     font-size: 20px;
     color: rgba(0,0,0,0.6);
     cursor: pointer;
+    @media (max-width: 768px) {
+        width: 90vw;
+        margin-left: 5vw;
+    }
     &:hover {
         background-color: rgba(207,207,207,0.25);
         color: rgba(0,0,0,0.75);

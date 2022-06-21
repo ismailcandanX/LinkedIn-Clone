@@ -29,6 +29,14 @@ export function signInAPI() {
     }
 }
 
+export function signOutAPI() {
+    return (dispatch) => {
+        signOut(auth).then(() => {
+            dispatch(setUser(null))
+        }).catch((error) => console.log(error))
+    }
+}
+
 export function getUserAuth() {
     return (dispatch) => {
         auth.onAuthStateChanged(async (user) => {
@@ -36,14 +44,6 @@ export function getUserAuth() {
                 dispatch(setUser(user))
             }
         })
-    }
-}
-
-export function signOutAPI() {
-    return (dispatch) => {
-        signOut(auth).then(() => {
-            dispatch(setUser(null))
-        }).catch((error) => console.log(error))
     }
 }
 

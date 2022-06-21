@@ -11,7 +11,6 @@ function App(props) {
   useEffect(() => {
     props.getUserAuth();
   }, [])
-
   return (
     <Routes>
       <Route path="/" element={<Login />} />
@@ -21,7 +20,9 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    user: state.userState.user,
+  }
 }
 const mapDispatchToProps = (dispatch) => ({
   getUserAuth: () => dispatch(getUserAuth())

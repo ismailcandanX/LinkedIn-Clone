@@ -74,8 +74,7 @@ const Feedlist = styled.ul`
         button {
             background-color: transparent;
             color: rgba(0, 0, 0, 0.6);
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
-            padding: 16px;
+            padding: 10px;
             align-items: center;
             border-radius: 15px;
             box-sizing: border-box;
@@ -86,6 +85,7 @@ const Feedlist = styled.ul`
             max-width: 480px;
             text-align: center;
             outline: none;
+            border: 2px solid rgba(10, 102, 194, 0.4);
         }
     }
 

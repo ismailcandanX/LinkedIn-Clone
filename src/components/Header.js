@@ -7,7 +7,7 @@ const Header = (props) => {
         <Container>
             <Content>
                 <Logo>
-                    <a href="/home">
+                    <a>
                         <img src="/images/home-logo.svg" alt="" />
                     </a>
                 </Logo>
@@ -65,7 +65,7 @@ const Header = (props) => {
 
                             </a>
 
-                            <SignOut>
+                            <SignOut onClick={() => props.signOut()}>
                                 <a>Sign Out</a>
                             </SignOut>
                         </User>
@@ -130,6 +130,7 @@ const Search = styled.div`
             height: 34px;
             border-color: #dce6f1;
             vertical-align: text-top;
+            outline: none;
         }
     }
 `
@@ -157,8 +158,11 @@ const Nav = styled.div`
         bottom: 0;
         background: white;
         width: 100%;
-
+        ul {
+            justify-content: center;
+        }
     }
+    
 `
 
 const NavListWrapper = styled.ul`
@@ -184,6 +188,7 @@ const NavListWrapper = styled.ul`
 const NavList = styled.li`
     display: flex;
     align-items: center;
+    cursor: pointer;
     a {
         align-items: center;
         background: transparent;
@@ -208,12 +213,25 @@ const NavList = styled.li`
             min-width: 70px;
 
         }
+        @media ( max-width: 550px){
+                span {
+                display: none;
+            }
+        }
     }
     &:hover, &:active {
         a{
             span {
                 color: rgba(0,0,0,0.9);
             }
+        }
+    }
+    @media (max-width: 550px) {
+        :nth-child(7){
+            display: none;
+        }
+        :nth-child(4){
+            display: none;
         }
     }
 `
@@ -227,7 +245,10 @@ const SignOut = styled.div`
     font-size: 16px;
     transition-duration: 0.2s;
     text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     display: none;
+    cursor: pointer;
+    
 `
 const User = styled(NavList)`
     a > svg {
